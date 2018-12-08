@@ -8,11 +8,12 @@ def comb(a,b):
     return factorial(a) / (factorial(b) * factorial(a - b))
 
 
-range_of_ns = range(5,10)
+n=500
+tol = 1e-6
 
-for n in range_of_ns:
+def main():
     sum = 0.0
-    for i in range(2,n):
+    for i in range(2,n+1):
         top = i-1
         bottom = i-1
         sumofterms = 0.0
@@ -22,4 +23,16 @@ for n in range_of_ns:
             top += 1
         lhs = sumofterms
         rhs = comb(n,i)
-        print("For i={} and n={}: LHS={} and RHS={}".format(i, n, lhs, rhs))
+        # print("For i={} and n={}: LHS={} and RHS={}".format(i, n, lhs, rhs))
+        if (lhs-rhs)/lhs > tol:
+            print("LHS not equal to RHS!!!")
+            print("LHS={} and RHS={}".format(lhs,rhs))
+            print("n={} and i={}".format(n,i))
+            return
+
+    print("Equality held.")
+    return
+
+
+if __name__ == "__main__":
+    main()
